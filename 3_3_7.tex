@@ -1,0 +1,128 @@
+\documentclass{amsart}
+\renewcommand{\baselinestretch}{1.1}
+
+\parskip 2mm
+
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fullpage}
+\usepackage{mathtools}
+
+\newtheorem{theirtheorem}{Theorem}
+\newtheorem{theirproposition}{Proposition}
+\renewcommand{\thetheirtheorem}{\Alph{theirtheorem}}
+\renewcommand{\thetheirproposition}{\Alph{theirproposition}}
+
+
+\theoremstyle{plain}
+\newtheorem{theorem}{\textbf{Theorem}}[section]
+\newtheorem{lemma}[theorem]{\textbf{Lemma}}
+\newtheorem{corollary}[theorem]{\textbf{Corollary}}
+\newtheorem{proposition}[theorem]{\textbf{Proposition}}
+\newtheorem{claim}{\textbf{Claim}}
+\newtheorem{conjecture}{\textbf{Conjecture}}[section]
+
+\theoremstyle{definition}
+\newtheorem{rk}{\textbf{Remark}}
+
+\newcommand{\Summ}[1]{\underset{#1}{\sum}}
+\newcommand{\sti}[2]{\left\{\begin{array}{c} #1 \\ #2 \end{array}\right\}}
+
+\newcommand{\diam}{\emph{diam}}
+\newcommand{\conv}{\mbox{Conv}}
+\newcommand{\C}{\mathcal {C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\F}{\mathbb{F}}
+
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\D}{\mathcal{D}}
+
+\newcommand{\ov}[1]{\overline{#1}}
+
+\newcommand{\nn}{\nonumber}
+
+\def\st{2}
+
+\thispagestyle{empty}
+
+\begin{document}
+
+    {\Large Combinatorics -- MAMME}
+    {\Large Chapter 3.3 -- Lovász Local Lemma}
+
+    \vspace{0.5cm}
+
+    \hrule
+
+    \vspace{0.5cm}
+
+    \begin{enumerate}
+
+
+    \item[\textbf{Problem 7:}]
+    A family $\mathcal{A}$ of $m$-subsets of [n] is a \emph{$k$-covering} if every
+    $i \in [n]$ is contained in at least $k$ sets of $\mathcal{A}$.
+    A $k$-covering $\mathcal{A}$ is \emph{decomposable} if there exists a partition
+    $\mathcal{A} = \mathcal{A}_1 \sqcup \mathcal{A}_2$ such that $\mathcal{A}_1$ and $\mathcal{A}_2$
+    are both $1$-coverings.
+    Show that if each point is in at most $t \leq 2^{k-4}/m$ sets then $\mathcal{A}$ is decomposable.
+
+
+
+    \end{enumerate}
+
+    \paragraph{\textbf{Solution (by Ferran Espuña):}}
+    We will work with a random partition of $\mathcal{A}$ into $\mathcal{A}_1$ and $\mathcal{A}_2$.
+    That is, each set of $\mathcal{A}$ is independently assigned to $\mathcal{A}_1$ with probability $1/2$,
+    and to $\mathcal{A}_2$ with probability $1/2$.
+    For convenience, we will define
+    \[
+        U_i \coloneqq \bigcup_{S \in \mathcal{A}_i}S
+    \]
+    Our goal will be to prove that the event
+    \[
+        B \coloneqq \left\{ U_1 = U_2 = [n]\right\}
+    \]
+    occurs with positive probability.
+    For this, we will define the events
+    \[
+        B_i \coloneqq \left\{ i \notin U_1 \text{ or } i \notin U_2 \right\}, \quad i \in [n]
+    \]
+    and note that \[
+        B = \cap_{i \in [n]} \overline{B_i}
+    \]
+    We will see that these events satisfy the conditions of the Lovász Local Lemma and we will be done.
+    First of all, because each $i \in [n]$ is in $c_i \geq k$ sets of $\mathcal{A}$,
+    the probability that all of them end up in the same set is
+    \[
+        2^{-c_i} + 2^{-c_i} = 2^{1-c_i} \leq 2^{1-k} \eqqcolon p
+    \]
+    where each summand corresponds to all sets ending up in $\mathcal{A}_1$ or $\mathcal{A}_2$.
+    Next, note that if we define \[
+        D_i \coloneqq \left\{
+        i \neq j \in [n] \mid
+        \{i, j\} \subseteq S \text{ for some } S \in \mathcal{A}
+        \right\}
+    \]
+    then $B_i$ is independent of all $B_j$ with $j \notin D_i$.
+    Let us now calculate a bound for all $|D_i|$.
+    For this, we will double count the number of pairs in \[
+        P_i \coloneqq \left\{ (S, j) \mid i \neq j \in [n], \{i, j\} \subset S \in \mathcal{A} \right\}
+    \]
+    On the one hand,
+    if we start counting on the first coordinate this is clearly at most $(m - 1)t$.
+    On the other hand, it is at least $|D_i|$ (one for each possible $j$). Therefore, \[
+        |D_i| \leq (m - 1)t \eqqcolon d
+    \]
+    All together,\[
+        ep(d+1) = e2^{1-k}((m-1)t + 1) \leq e2^{1-k}mt \leq e2^{1-k}2^{k-4} = e/8 < 1
+    \]
+    \qed
+
+\end{document}

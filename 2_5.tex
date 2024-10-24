@@ -1,0 +1,94 @@
+\documentclass{amsart}
+\renewcommand{\baselinestretch}{1.1}
+
+\parskip 2mm
+
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fullpage}
+\usepackage{mathtools}
+
+\newtheorem{theirtheorem}{Theorem}
+\newtheorem{theirproposition}{Proposition}
+\renewcommand{\thetheirtheorem}{\Alph{theirtheorem}}
+\renewcommand{\thetheirproposition}{\Alph{theirproposition}}
+
+
+\theoremstyle{plain}
+\newtheorem{theorem}{\textbf{Theorem}}[section]
+\newtheorem{lemma}[theorem]{\textbf{Lemma}}
+\newtheorem{corollary}[theorem]{\textbf{Corollary}}
+\newtheorem{proposition}[theorem]{\textbf{Proposition}}
+\newtheorem{claim}{\textbf{Claim}}
+\newtheorem{conjecture}{\textbf{Conjecture}}[section]
+
+\theoremstyle{definition}
+\newtheorem{rk}{\textbf{Remark}}
+
+\newcommand{\Summ}[1]{\underset{#1}{\sum}}
+\newcommand{\sti}[2]{\left\{\begin{array}{c} #1 \\ #2 \end{array}\right\}}
+
+\newcommand{\diam}{\emph{diam}}
+\newcommand{\conv}{\mbox{Conv}}
+\newcommand{\C}{\mathcal {C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\F}{\mathbb{F}}
+
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\D}{\mathcal{D}}
+
+\newcommand{\ov}[1]{\overline{#1}}
+
+\newcommand{\nn}{\nonumber}
+
+\def\st{2}
+
+\thispagestyle{empty}
+
+\begin{document}
+
+    {\Large Combinatorics -- MAMME}
+    {\Large Chapter 2.1 -- Ramsey Theorem}
+
+    \vspace{0.5cm}
+
+    \hrule
+
+    \vspace{0.5cm}
+
+    \begin{enumerate}
+
+
+    \item[\textbf{Problem 5:}] Let $(G, \cdot)$ be a finite \emph{semigroup} (that is, we only require the operation to be associative).
+    Prove that there is $a \in G$ such that $a^2 = a$.
+    [Hint: Use Ramsey's Theorem on triangles in a sufficiently large sequence of elements of $G$.]
+    \end{enumerate}
+
+    \paragraph{\textbf{Solution (by Ferran Espuña):}} Pick any $x \in G$.
+    We will finitely color the sets of two positive integers as follows:
+
+    \begin{align*}
+        c: \binom{\mathbb{Z}_+}{2} & \longrightarrow G \\
+        \{i < j\} & \longmapsto x^{j-i}
+    \end{align*}
+
+    \noindent By Ramsey's Theorem, there is an infinite set $A \subset \mathbb{Z}_+$ such that $c$ is constant on $\binom{A}{2}$.
+    In particular, for any $i < j < k$ in $A$, we have $x^{j-i} = x^{k-i} = x^{k-j} \eqqcolon a$,
+    with $a^2 = x^{j-i} \cdot x^{k-j} = x^{k-i} = a$.
+
+    \begin{rk}
+        The fact that the operation is associative is crucial for the proof, if somewhat hidden in it.
+        Indeed, if the operation were not associative, we would need to define exponentiation of elements of $G$ more carefully
+        (e.g.\ by choosing to repeatedly apply the operation from the left or from the right).
+        In that case, we could not just add the exponents of a product as we do in the last step of the proof.
+
+    \end{rk}
+
+\end{document}
+

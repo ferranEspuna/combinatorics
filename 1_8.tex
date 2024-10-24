@@ -1,0 +1,137 @@
+\documentclass{amsart}
+\renewcommand{\baselinestretch}{1.1}
+
+\parskip 2mm
+
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fullpage}
+
+\newtheorem{theirtheorem}{Theorem}
+\newtheorem{theirproposition}{Proposition}
+\renewcommand{\thetheirtheorem}{\Alph{theirtheorem}}
+\renewcommand{\thetheirproposition}{\Alph{theirproposition}}
+
+
+\theoremstyle{plain}
+\newtheorem{theorem}{\textbf{Theorem}}[section]
+\newtheorem{lemma}[theorem]{\textbf{Lemma}}
+\newtheorem{corollary}[theorem]{\textbf{Corollary}}
+\newtheorem{proposition}[theorem]{\textbf{Proposition}}
+\newtheorem{claim}{\textbf{Claim}}
+\newtheorem{conjecture}{\textbf{Conjecture}}[section]
+
+\theoremstyle{definition}
+\newtheorem{rk}{\textbf{Remark}}
+
+\newcommand{\Summ}[1]{\underset{#1}{\sum}}
+\newcommand{\sti}[2]{\left\{\begin{array}{c} #1 \\ #2 \end{array}\right\}}
+
+\newcommand{\diam}{\emph{diam}}
+\newcommand{\conv}{\mbox{Conv}}
+\newcommand{\C}{\mathcal {C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\F}{\mathbb{F}}
+
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\D}{\mathcal{D}}
+
+\newcommand{\ov}[1]{\overline{#1}}
+
+\newcommand{\nn}{\nonumber}
+
+\def\st{2}
+
+\thispagestyle{empty}
+
+\begin{document}
+
+    {\Large Combinatorics -- MAMME}
+    {\Large Chapter 1.1 -- Sperner's Theorem}
+
+    \vspace{0.5cm}
+
+    \hrule
+
+    \vspace{0.5cm}
+
+    \begin{enumerate}
+
+
+    \item[\textbf{Problem 8:}] Let $P$ be a ranked poset with the LYM property.
+    A \emph{regular covering of chains} of $P$ is a family $\mathcal{C}$ of maximal chains such that
+    any two elements of $P$ with the same rank are in the same number of chains in $\mathcal{C}$.
+    Prove that, for any real valued function $f : P \longrightarrow \mathbb{R}$ and every subset $X \subset P$,
+
+    \begin{equation}\label{eq:whatwewant}
+    \sum_{x \in X} \frac{f(x)}{  \lvert P_{r(x)} \rvert } \leq \max_{c \in \mathcal{C}} \sum_{x \in X \cap c} f(x)
+    \end{equation}
+    Deduce the following theorem of Erd\H{o}s: If $\mathcal{A}$ is a family of subsets of $[n]$ such that
+    the longest chain in $\mathcal{A}$ has length at most $k$, then
+
+    \begin{equation}\label{eq:erdos}
+    \lvert \mathcal{A} \rvert \leq \sum_{i = 0}^{k-1}\binom{n}{\lfloor (n+i)/2 \rfloor}
+    \end{equation}
+
+    \noindent [Hint: For the first inequality consider the function F: $\mathcal{C} \to \R $ definded as $F(c) = \sum_{x \in c} f(x)$ and use double counting.
+    For the second inequality, chose $f(x) = \lvert P_{r(x)} \rvert$.]
+    \end{enumerate}
+
+    \paragraph{\textbf{Solution (by Ferran Espuña):}} Every element of $P_k$
+    is in the same number of chains of $\mathcal{C}$ for all $k$.
+    Conversely, every
+    chain in $\mathcal{C}$ is maximal, so it contains one element of each $P_k$.
+    Therefore, every element $x \in P_{r(x)}$
+    is contained in exactly $\frac{\lvert \mathcal{C} \rvert}{\lvert P_{r(x)} \rvert}$ chains of $\mathcal{C}$.
+    Therefore,
+
+    \begin{equation}\label{eq:intermediate_1}
+    \sum_{c \in \mathcal{C}} \sum_{x \in X \cap c} f(x) =
+    \sum_{x \in X} \frac{\lvert \mathcal{C} \rvert f(x)}{\lvert P_{r(x)} \rvert}
+    = \lvert \mathcal{C} \rvert \sum_{x \in X} \frac{f(x)}{\lvert P_{r(x)} \rvert}
+    \end{equation}
+
+    However,
+
+    \begin{equation}\label{eq:intermediate_2}
+    \sum_{c \in \mathcal{C}} \sum_{x \in X \cap c} f(x) \leq \lvert \mathcal{C} \rvert \max_{c \in \mathcal{C}} \sum_{x \in X \cap c} f(x)
+    \end{equation}
+    Putting these two equations together, and dividing by $\lvert \mathcal{C} \rvert$, we get~\eqref{eq:whatwewant}.
+
+    \noindent To get Erd\H{o}s' theorem, we take $P$ to be the poset of subsets of $[n]$ ordered by inclusion.
+    To get a regular covering of $P$, we just take $\mathcal{C}$ to be the family of all maximal chains.
+    This is a regular covering because every element of $P_k$ is in exactly $k!(n-k)!$ chains.
+    We will apply~\eqref{eq:whatwewant} to the set $X = \mathcal{A}$.
+    We define $f(x) = \lvert P_{r(x)} \rvert$, so that the left hand side of~\eqref{eq:whatwewant} is just
+    $\sum_{x \in X} 1 = \lvert \mathcal{A} \rvert$.
+    Because $\lvert P_j \rvert = \binom{n}{j}$,
+    and chains don't have elements of the same rank, the right hand side of~\eqref{eq:whatwewant} is
+    the sum of at most $k$ binomial coefficients $\binom{n}{j}$ for \emph{different} $j$.
+    Taking the $k$ largest ones (and recalling that $\binom{n}{j} = \binom{n}{n-j}$), we get Erd\H{o}s' theorem.
+
+    \begin{rk}
+        \eqref{eq:erdos} is a generalization of Sperner's theorem,
+        which we can recover by taking $k=1$ so that $\mathcal{A}$ is an antichain.
+    \end{rk}
+
+    \begin{rk}
+    The LYM property wasn't used in the proof, so~\eqref{eq:whatwewant}
+    holds for any ranked poset with a regular covering.
+    In fact, we can recover the LYM property by repeating the same argument with $f(x) \equiv 1 $
+    and letting $\mathcal{A}$ be an antichain so that the right hand side of~\eqref{eq:whatwewant} is 1.
+    let us state this formally:
+
+    \begin{proposition}
+        Let $P$ be a ranked poset.
+        If there exists a regular covering of $P$, then $P$ has the LYM property.
+    \end{proposition}
+
+    \end{rk}
+\end{document}
+
