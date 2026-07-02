@@ -1,0 +1,11 @@
+
+# Project build outputs
+/build/
+/dist/
+/out/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
